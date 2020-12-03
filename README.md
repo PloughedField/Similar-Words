@@ -3,12 +3,11 @@ A small web service for printing similar words in the English language.
 
 How To Use
 
-    1. install python 3
-    2. pip install -r requirements.txt
+   
+    Run 
 
-Run 
-
-    main.py
+    1. sudo docker build -t similar_words . 
+    2. sudo docker run  -d -it  --rm  --name similar_words_api  -p 8000:8000  similar_words
 
 
 DB
