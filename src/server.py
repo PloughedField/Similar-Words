@@ -5,7 +5,7 @@ class Data:
     def __init__(self):
         try:
             self.txt = open('words_clean.txt', 'r')
-            self.file_prime = open('dict_prime.json', 'r')
+            self.file_prime = open('convert_prime_numbers.json', 'r')
             self.dict_prime = json.load(self.file_prime)
             self.file_stats = open('stats.json', 'r')
             self.stats = json.load(self.file_stats)
@@ -38,7 +38,7 @@ class Data:
 
     #save new dictionary in JSON file.
     def save_sorted_words(self):
-        with open('dict_new.json', 'w')as json_file:
+        with open('new_db.json', 'w')as json_file:
             json.dump(self.sort_dict, json_file, indent=4)
 
 
@@ -46,9 +46,9 @@ class Server:
 
     def __init__(self):
         try:
-            self.data_file = open('dict_new.json', 'r')
+            self.data_file = open('new_db.json', 'r')
             self.db_words = json.load(self.data_file)
-            self.file_prime = open('dict_prime.json', 'r')
+            self.file_prime = open('convert_prime_numbers.json', 'r')
             self.dict_prime = json.load(self.file_prime)
             self.file_stats = open('stats.json', 'r')
             self.stats = json.load(self.file_stats)
