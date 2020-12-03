@@ -4,6 +4,7 @@ import uvicorn as uvicorn
 from server import *
 import webbrowser
 import time
+import logging
 
 tags_metadata = [
     {
@@ -34,6 +35,8 @@ tags_metadata = [
 
 app = FastAPI( title="Api Similar Words",openapi_tags=tags_metadata)
 
+logging.basicConfig(level=logging.ERROR,filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s',datefmt='%d-%b-%y %H:%M:%S')
+
 
 @app.get("/",tags=["Docs Api"])
 def docs_api():
@@ -55,8 +58,8 @@ async def get_words (word: Optional[str] = None):
 
 @app.get("/api/v1/stats/",tags=["Get Statistics"])
 async def get_stat():
-        response = Server().metrics()
-        return response
+    response = Server().metrics()
+    return response
 
 
 
@@ -69,8 +72,9 @@ if __name__ == "__main__":
         data.save_sorted_words()
         # run API server
         uvicorn.run("main:app", host='0.0.0.0', port=8000, reload=True, workers=20)
-    except Exception as error:
-        print(error)
+    except Exception as err:
+        logging.error(err)
+
 
 
 
