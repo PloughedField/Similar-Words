@@ -12,9 +12,15 @@ Run
 
 
 DB
-
-    A DB of the English dictionary should be provided.
-    The service expects the DB ("words_clean.txt" text file) to be in the local directory.
+       
+    "words_clean.txt" text file local directory.
+    
+NEW DB 
+     
+     "new_db.json"  text file local directory.
+    
+    
+    
 
 Algorithm
 
