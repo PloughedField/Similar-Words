@@ -68,7 +68,7 @@ if __name__ == "__main__":
         data.read_words()
         data.save_sorted_words()
         # run API server
-        uvicorn.run("main:app", host='localhost', port=8000, reload=True, workers=20)
+        uvicorn.run("main:app", host='0.0.0.0', port=8000, reload=True, workers=20)
     except Exception as error:
         print(error)
 
