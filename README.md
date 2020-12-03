@@ -32,5 +32,5 @@ Algorithm
   Return request
   
     1. Big O calculation:
-    2. Since db is implemented by a Golang hash map, Retrieval is O(1). 
+    2. Retrieve a list of words from DB in O1A unique key that doubles prime numbers from a hash table.
 
