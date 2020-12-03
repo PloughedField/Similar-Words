@@ -1,5 +1,7 @@
 import json
 import time
+import logging
+logging.basicConfig(level=logging.ERROR,filename='app.log', filemode='w', format='%(name)s - %(levelname)s - %(message)s',datefmt='%d-%b-%y %H:%M:%S')
 
 class Data:
     def __init__(self):
@@ -11,8 +13,9 @@ class Data:
             self.stats = json.load(self.file_stats)
             self.sort_dict ={}
             self.count_words = 0
-        except FileNotFoundError as error:
-            return error
+        except Exception as err:
+            logging.error(err)
+            return err
 
     #get word from file.
     def read_words(self):
@@ -28,7 +31,8 @@ class Data:
         try:
             for l in word:
                 sum_l *= self.dict_prime[l]
-        except KeyError:
+        except Exception as err:
+            logging.error(err)
             return "Please enter a valid word"
 
         if sum_l  not in self.sort_dict:
@@ -39,7 +43,7 @@ class Data:
     #save new dictionary in JSON file.
     def save_sorted_words(self):
         with open('new_db.json', 'w')as json_file:
-            json.dump(self.sort_dict, json_file, indent=4)
+            json.dump(self.sort_dict, json_file)
 
 
 class Server:
@@ -54,8 +58,9 @@ class Server:
             self.stats = json.load(self.file_stats)
             self.sum_letter = 1
             self.totalRequests = 0
-        except FileNotFoundError as error:
-            return error
+        except Exception as err:
+            logging.error(err)
+            return  err
 
     # check if the word sum exists in the dictionary
     def similar_words(self,word,start_time):
@@ -64,7 +69,8 @@ class Server:
         try:
             for letter in word:
                 self.sum_letter *= self.dict_prime[letter]
-        except KeyError:
+        except Exception as err:
+            logging.error(err)
             return "Please enter a valid word"
         end_time = (time.time_ns() - start_time)
         self.stats["avgProcessingTimeNs"] += [end_time] # avg run time for stats.
@@ -74,7 +80,8 @@ class Server:
             # response to client.
             self.db_words[str(self.sum_letter)].remove(word)
             return {"similar": self.db_words[str(self.sum_letter)]}
-        except KeyError:
+        except Exception as err:
+            logging.error(err)
             return {"similar": []}
 
     # get statistic
