@@ -3,7 +3,7 @@ A small web service for printing similar words in the English language.
 
 How To Use
 
-    1. install python
+    1. install python 3
     2. pip install -r requirements.txt
 
 Run 
